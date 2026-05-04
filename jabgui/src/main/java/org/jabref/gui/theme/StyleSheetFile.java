@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.jabref.logic.util.URLUtil;
 
 import com.google.common.base.Strings;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,8 @@ final class StyleSheetFile extends StyleSheet {
 
     private final AtomicReference<String> dataUrl = new AtomicReference<>();
 
-    StyleSheetFile(URL url) {
+    StyleSheetFile(String name, URL url) {
+        super(name);
         this.url = url;
         this.path = Path.of(URLUtil.createUri(url.toExternalForm()));
         reload();
@@ -68,20 +70,10 @@ final class StyleSheetFile extends StyleSheet {
 
     @Override
     public URL getSceneStylesheet() {
-        if (!Files.exists(path)) {
-            LOGGER.warn("Cannot load additional css {} because the file does not exist.", path);
-            return null;
-        }
-
-        if (Files.isDirectory(path)) {
-            LOGGER.warn("Failed to loadCannot load additional css {} because it is a directory.", path);
-            return null;
-        }
-
         return url;
     }
 
-    /// This method allows callers to obtain the theme's additional stylesheet.
+    /// This method allows callers to obtain the theme's custom stylesheet.
     ///
     /// @return the stylesheet location if there is an additional stylesheet present and available. The
     /// location will be a local URL. Typically, it will be a `'data:'` URL where the CSS is embedded. However, for
@@ -93,7 +85,7 @@ final class StyleSheetFile extends StyleSheet {
         }
 
         if (Strings.isNullOrEmpty(dataUrl.get())) {
-            URL stylesheet = getSceneStylesheet();
+            URL stylesheet = getStylesheetURLIfExists();
             return stylesheet == null ? "" : stylesheet.toExternalForm();
         }
 
@@ -120,6 +112,20 @@ final class StyleSheetFile extends StyleSheet {
         }
 
         return Optional.empty();
+    }
+
+    private @Nullable URL getStylesheetURLIfExists() {
+        if (!Files.exists(path)) {
+            LOGGER.warn("Cannot load custom css {} because the file does not exist.", path);
+            return null;
+        }
+
+        if (Files.isDirectory(path)) {
+            LOGGER.warn("Cannot load custom css {} because it is a directory.", path);
+            return null;
+        }
+
+        return url;
     }
 
     @Override
