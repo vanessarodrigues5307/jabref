@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 public class BibEntryTypesManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(BibEntryTypesManager.class);
 
-    private final InternalEntryTypes BIBTEX_ENTRYTYPES = new InternalEntryTypes(
+    private final InternalEntryTypes bibtexEntryTypes = new InternalEntryTypes(
             Stream.concat(BibtexEntryTypeDefinitions.ALL.stream(), IEEETranEntryTypeDefinitions.ALL.stream())
                   .collect(Collectors.toList()));
 
-    private final InternalEntryTypes BIBLATEX_ENTRYTYPES = new InternalEntryTypes(
+    private final InternalEntryTypes biblatexEntryTypes = new InternalEntryTypes(
             Stream.concat(BiblatexEntryTypeDefinitions.ALL.stream(),
                           Stream.concat(BiblatexSoftwareEntryTypeDefinitions.ALL.stream(),
                                   Stream.concat(BiblatexAPAEntryTypeDefinitions.ALL.stream(),
@@ -49,9 +49,9 @@ public class BibEntryTypesManager {
     InternalEntryTypes getEntryTypes(BibDatabaseMode mode) {
         return switch (mode) {
             case BIBTEX ->
-                    BIBTEX_ENTRYTYPES;
+                    bibtexEntryTypes;
             case BIBLATEX ->
-                    BIBLATEX_ENTRYTYPES;
+                    biblatexEntryTypes;
         };
     }
 
@@ -267,3 +267,4 @@ public class BibEntryTypesManager {
         }
     }
 }
+#oi 
