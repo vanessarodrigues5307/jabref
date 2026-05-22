@@ -43,6 +43,7 @@ public class BibEntryTypesManager {
                   .collect(Collectors.toList()));
 
     public BibEntryTypesManager() {
+        // Construtor padrão vazio intencionalmente 
     }
 
     @VisibleForTesting
@@ -267,4 +268,3 @@ public class BibEntryTypesManager {
         }
     }
 }
-#oi 
