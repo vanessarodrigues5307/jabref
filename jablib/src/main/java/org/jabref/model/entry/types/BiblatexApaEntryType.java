@@ -6,11 +6,11 @@ import java.util.Optional;
 
 public enum BiblatexApaEntryType implements EntryType {
 
-    Legislation("Legislation"),
-    Legadminmaterial("Legadminmaterial"),
-    Jurisdiction("Jurisdiction"),
-    Constitution("Constitution"),
-    Legal("Legal");
+    LEGISLATION("Legislation"),
+    LEGADMINMATERIAL("Legadminmaterial"),
+    JURISDICTION("Jurisdiction"),
+    CONSTITUTION("Constitution"),
+    LEGAL("Legal");
 
     private final String displayName;
 

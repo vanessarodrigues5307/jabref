@@ -1,0 +1,68 @@
+rule,severity,message,file,line
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,9.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,10.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,11.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,12.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,13.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,14.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,15.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,16.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,17.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,18.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,19.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexNonStandardEntryType.java,20.0
+java:S3776,CRITICAL,Refactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.,jabref-entry:Date.java,127.0
+java:S1192,CRITICAL,"Define a constant instead of duplicating this literal "" and "" 8 times.",jabref-entry:AuthorList.java,153.0
+java:S3776,CRITICAL,Refactor this method to reduce its Cognitive Complexity from 89 to the 15 allowed.,jabref-entry:BibEntry.java,188.0
+java:S2975,BLOCKER,"Remove this ""clone"" implementation; use a copy constructor or copy factory instead.",jabref-entry:BibtexString.java,160.0
+java:S1192,CRITICAL,"Define a constant instead of duplicating this literal ""Invalid Date format"" 3 times.",jabref-entry:Date.java,220.0
+java:S1192,CRITICAL,"Define a constant instead of duplicating this literal ""Invalid Date format range"" 3 times.",jabref-entry:Date.java,174.0
+java:S1192,CRITICAL,"Define a constant instead of duplicating this literal ""Fields {} already added to type {}."" 3 times.",jabref-entry:BibEntryTypeBuilder.java,41.0
+java:S5361,CRITICAL,"Replace this call to ""replaceAll()"" by a call to the ""replace()"" method.",jabref-entry:identifier/DOI.java,159.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexApaEntryType.java,9.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexApaEntryType.java,10.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexApaEntryType.java,11.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexApaEntryType.java,12.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexApaEntryType.java,13.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexSoftwareEntryType.java,9.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexSoftwareEntryType.java,10.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexSoftwareEntryType.java,11.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/BiblatexSoftwareEntryType.java,12.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,43.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,42.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/IEEETranEntryType.java,8.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/IEEETranEntryType.java,9.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/IEEETranEntryType.java,10.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/IEEETranEntryType.java,11.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/IEEETranEntryType.java,12.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,22.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,23.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,24.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,25.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,27.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,28.0
+java:S1186,CRITICAL,"Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.",jabref-entry:BibEntryTypesManager.java,
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,11.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,12.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,13.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,14.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,15.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,16.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,17.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,18.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,19.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,20.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,21.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,29.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,30.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,31.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,32.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,33.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,34.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,35.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,36.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,37.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,38.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,39.0
+java:S115,CRITICAL,Rename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.,jabref-entry:types/StandardEntryType.java,40.0
+java:S3776,CRITICAL,Refactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.,jabref-entry:Author.java,76.0

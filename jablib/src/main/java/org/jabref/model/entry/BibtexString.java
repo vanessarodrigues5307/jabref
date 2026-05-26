@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /// This class models a BibTex String ("@String")
-public class BibtexString implements Cloneable {
+public class BibtexString {
 
     /// Type of a \@String.
     ///
@@ -96,6 +96,18 @@ public class BibtexString implements Cloneable {
         hasChanged = false;
     }
 
+    /// Copy constructor
+    ///
+    /// @param other the BibtexString to copy
+    public BibtexString(BibtexString other) {
+        this.id = other.id;
+        this.name = other.name;
+        this.content = other.content;
+        this.type = other.type;
+        this.parsedSerialization = other.parsedSerialization;
+        this.hasChanged = other.hasChanged;
+    }
+
     public String getId() {
         return id;
     }
@@ -154,18 +166,6 @@ public class BibtexString implements Cloneable {
             }
         }
         return "";
-    }
-
-    @Override
-    public Object clone() {
-        BibtexString clone;
-        if (parsedSerialization == null) {
-            clone = new BibtexString(name, content);
-        } else {
-            clone = new BibtexString(name, content, parsedSerialization);
-        }
-        clone.setId(id);
-        return clone;
     }
 
     @Override

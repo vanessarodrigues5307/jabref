@@ -43,7 +43,7 @@ public class BibEntryTypesManager {
                   .collect(Collectors.toList()));
 
     public BibEntryTypesManager() {
-        // Construtor padrão vazio intencionalmente 
+        // Default constructor used for dependency injection
     }
 
     @VisibleForTesting

@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public enum BiblatexSoftwareEntryType implements EntryType {
 
-    Dataset("Dataset"),
-    SoftwareVersion("SoftwareVersion"),
-    SoftwareModule("SoftwareModule"),
-    CodeFragment("CodeFragment");
+    DATASET("Dataset"),
+    SOFTWARE_VERSION("SoftwareVersion"),
+    SOFTWARE_MODULE("SoftwareModule"),
+    CODE_FRAGMENT("CodeFragment");
 
     private final String displayName;
 

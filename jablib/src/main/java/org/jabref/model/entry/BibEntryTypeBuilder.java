@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 public class BibEntryTypeBuilder {
     private static final Logger LOGGER = LoggerFactory.getLogger(BibEntryTypeBuilder.class);
+    private static final String FIELDS_ALREADY_ADDED_MSG = "Fields {} already added to type {}.";
     private final SequencedSet<OrFields> requiredFields = new LinkedHashSet<>();
     private final Set<Field> seenFields = new HashSet<>();
     private SequencedSet<BibField> optionalFields = new LinkedHashSet<>();
@@ -38,7 +39,7 @@ public class BibEntryTypeBuilder {
     public BibEntryTypeBuilder withImportantFields(SequencedSet<Field> newFields) {
         List<Field> containedFields = containedInSeenFields(newFields);
         if (!containedFields.isEmpty()) {
-            LOGGER.warn("Fields {} already added to type {}.", containedFields, type.getDisplayName());
+            LOGGER.warn(FIELDS_ALREADY_ADDED_MSG, containedFields, type.getDisplayName());
             hasWarnings = true;
         }
         this.seenFields.addAll(newFields);
@@ -54,7 +55,7 @@ public class BibEntryTypeBuilder {
     public BibEntryTypeBuilder withDetailFields(SequencedCollection<Field> newFields) {
         List<Field> containedFields = containedInSeenFields(newFields);
         if (!containedFields.isEmpty()) {
-            LOGGER.warn("Fields {} already added to type {}.", containedFields, type.getDisplayName());
+            LOGGER.warn(FIELDS_ALREADY_ADDED_MSG, containedFields, type.getDisplayName());
             hasWarnings = true;
         }
         this.seenFields.addAll(newFields);
@@ -75,7 +76,7 @@ public class BibEntryTypeBuilder {
         Set<Field> fieldsToAdd = requiredFields.stream().map(OrFields::getFields).flatMap(Set::stream).collect(Collectors.toSet());
         List<Field> containedFields = containedInSeenFields(fieldsToAdd);
         if (!containedFields.isEmpty()) {
-            LOGGER.warn("Fields {} already added to type {}.", containedFields, type.getDisplayName());
+            LOGGER.warn(FIELDS_ALREADY_ADDED_MSG, containedFields, type.getDisplayName());
             hasWarnings = true;
         }
         this.seenFields.addAll(fieldsToAdd);

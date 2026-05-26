@@ -24,6 +24,8 @@ public class Date {
     private static final DateTimeFormatter NORMALIZED_DATE_FORMATTER = DateTimeFormatter.ofPattern("uuuu[-MM][-dd]");
     private static final DateTimeFormatter SIMPLE_DATE_FORMATS;
     private static final Logger LOGGER = LoggerFactory.getLogger(Date.class);
+    private static final String INVALID_DATE_FORMAT_MSG = "Invalid Date format";
+    private static final String INVALID_DATE_FORMAT_RANGE_MSG = "Invalid Date format range";
 
     static {
         List<String> formatStrings = Arrays.asList(
@@ -131,7 +133,32 @@ public class Date {
             return Optional.empty();
         }
 
-        // if dateString has range format, treat as date range
+        // Try to parse different date formats
+        Optional<Date> result = tryParseRangeFormat(dateString);
+        if (result.isPresent()) {
+            return result;
+        }
+
+        result = tryParseEraIndicatorFormat(dateString);
+        if (result.isPresent()) {
+            return result;
+        }
+
+        result = tryParseSeasonFormat(dateString);
+        if (result.isPresent()) {
+            return result;
+        }
+
+        result = tryParseSimpleFormat(dateString);
+        if (result.isPresent()) {
+            return result;
+        }
+
+        return Optional.empty();
+    }
+
+    private static Optional<Date> tryParseRangeFormat(String dateString) {
+        // if dateString has range format, treat as date range (without spaces)
         if (dateString.matches(
                 "\\d{4}/\\d{4}|" + // uuuu/uuuu
                         "\\d{4}-\\d{2}/\\d{4}-\\d{2}|" + // uuuu-mm/uuuu-mm
@@ -151,7 +178,6 @@ public class Date {
                 return Optional.of(new Date(parsedDate, parsedEndDate));
             } catch (DateTimeParseException e) {
                 LOGGER.warn("Invalid Date format for range", e);
-                return Optional.empty();
             }
         } else if (dateString.matches(
                 "\\d{4} / \\d{4}|" + // uuuu / uuuu
@@ -171,8 +197,7 @@ public class Date {
                 TemporalAccessor parsedEndDate = SIMPLE_DATE_FORMATS.parse(strDates[1].strip());
                 return Optional.of(new Date(parsedDate, parsedEndDate));
             } catch (DateTimeParseException e) {
-                LOGGER.warn("Invalid Date format range", e);
-                return Optional.empty();
+                LOGGER.warn(INVALID_DATE_FORMAT_RANGE_MSG, e);
             }
         } else if (dateString.matches(
                 "\\d{1,4} BC/\\d{1,4} AD|" + // 30 BC/5 AD and 0030 BC/0005 AD
@@ -188,8 +213,7 @@ public class Date {
                 TemporalAccessor parsedEndDate = parseDateWithEraIndicator(strDates[1]);
                 return Optional.of(new Date(parsedDate, parsedEndDate));
             } catch (DateTimeParseException e) {
-                LOGGER.warn("Invalid Date format range", e);
-                return Optional.empty();
+                LOGGER.warn(INVALID_DATE_FORMAT_RANGE_MSG, e);
             }
         } else if (dateString.matches(
                 "\\d{1,4} BC / \\d{1,4} AD|" + // 30 BC / 5 AD and 0030 BC / 0005 AD
@@ -205,11 +229,14 @@ public class Date {
                 TemporalAccessor parsedEndDate = parseDateWithEraIndicator(strDates[1]);
                 return Optional.of(new Date(parsedDate, parsedEndDate));
             } catch (DateTimeParseException e) {
-                LOGGER.warn("Invalid Date format range", e);
-                return Optional.empty();
+                LOGGER.warn(INVALID_DATE_FORMAT_RANGE_MSG, e);
             }
         }
 
+        return Optional.empty();
+    }
+
+    private static Optional<Date> tryParseEraIndicatorFormat(String dateString) {
         // if dateString is single year
         if (dateString.matches("\\d{4}-|\\d{4}\\?")) {
             try {
@@ -217,8 +244,7 @@ public class Date {
                 TemporalAccessor parsedDate = SIMPLE_DATE_FORMATS.parse(year);
                 return Optional.of(new Date(parsedDate));
             } catch (DateTimeParseException e) {
-                LOGGER.debug("Invalid Date format", e);
-                return Optional.empty();
+                LOGGER.debug(INVALID_DATE_FORMAT_MSG, e);
             }
         }
 
@@ -235,34 +261,38 @@ public class Date {
                 return Optional.of(new Date(date));
             } catch (DateTimeParseException e) {
                 LOGGER.warn("Invalid Date format with era indicator", e);
-                return Optional.empty();
             }
         }
+
+        return Optional.empty();
+    }
+
+    private static Optional<Date> tryParseSeasonFormat(String dateString) {
         // handle date whose month is represented as a season.
         if (dateString.matches(
                 "^(\\d{1,4})-(\\d{1,2})$" // covers 2025-21
         )) {
             try {
                 // parse the date with season
-                Optional<Date> optional = parseDateWithSeason(dateString);
-                if (optional.isPresent()) {
-                    return optional;
-                }
-                // else, just pass
+                return parseDateWithSeason(dateString);
             } catch (DateTimeParseException e) {
                 // neither month nor season.
-                LOGGER.debug("Invalid Date format", e);
-                return Optional.empty();
+                LOGGER.debug(INVALID_DATE_FORMAT_MSG, e);
             }
         }
 
+        return Optional.empty();
+    }
+
+    private static Optional<Date> tryParseSimpleFormat(String dateString) {
         try {
             TemporalAccessor parsedDate = SIMPLE_DATE_FORMATS.parse(dateString);
             return Optional.of(new Date(parsedDate));
         } catch (DateTimeParseException e) {
-            LOGGER.debug("Invalid Date format", e);
-            return Optional.empty();
+            LOGGER.debug(INVALID_DATE_FORMAT_MSG, e);
         }
+
+        return Optional.empty();
     }
 
     public static Optional<Date> parse(Optional<String> yearValue,

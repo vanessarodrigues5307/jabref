@@ -6,18 +6,18 @@ import java.util.Optional;
 
 public enum BiblatexNonStandardEntryType implements EntryType {
 
-    Artwork("Artwork"),
-    Audio("Audio"),
-    Bibnote("Bibnote"),
-    Commentary("Commentary"),
-    Image("Image"),
-    Letter("Letter"),
-    Movie("Movie"),
-    Music("Music"),
-    Performance("Performance"),
-    Review("Review"),
-    Standard("Standard"),
-    Video("Video");
+    ARTWORK("Artwork"),
+    AUDIO("Audio"),
+    BIBNOTE("Bibnote"),
+    COMMENTARY("Commentary"),
+    IMAGE("Image"),
+    LETTER("Letter"),
+    MOVIE("Movie"),
+    MUSIC("Music"),
+    PERFORMANCE("Performance"),
+    REVIEW("Review"),
+    STANDARD("Standard"),
+    VIDEO("Video");
 
     private final String displayName;
 

@@ -119,6 +119,7 @@ import org.jspecify.annotations.NonNull;
 public class AuthorList implements Iterable<Author> {
 
     private static final Map<String, AuthorList> AUTHOR_CACHE = Collections.synchronizedMap(new WeakHashMap<>());
+    private static final String AND_SEPARATOR = " and ";
     private final List<Author> authors;
     private AuthorList latexFreeAuthors;
 
@@ -150,7 +151,7 @@ public class AuthorList implements Iterable<Author> {
     }
 
     private static String andCoordinatedConjunction(List<String> authors, boolean oxfordComma) {
-        String lastDelimiter = oxfordComma ? ", and " : " and ";
+        String lastDelimiter = oxfordComma ? ", and " : AND_SEPARATOR;
         int lastIndex = authors.size() - 1;
         return switch (authors.size()) {
             case 0 ->
@@ -158,7 +159,7 @@ public class AuthorList implements Iterable<Author> {
             case 1 ->
                     authors.getFirst();
             case 2 ->
-                    authors.getFirst() + " and " + authors.get(1);
+                    authors.getFirst() + AND_SEPARATOR + authors.get(1);
             default ->
                     String.join(", ", authors.subList(0, lastIndex)) + lastDelimiter + authors.get(lastIndex);
         };
@@ -290,7 +291,7 @@ public class AuthorList implements Iterable<Author> {
             case 1 ->
                     authors.getFirst().getNamePrefixAndFamilyName();
             case 2 ->
-                    authors.getFirst().getNamePrefixAndFamilyName() + " and " + authors.get(1).getNamePrefixAndFamilyName();
+                    authors.getFirst().getNamePrefixAndFamilyName() + AND_SEPARATOR + authors.get(1).getNamePrefixAndFamilyName();
             default ->
                     authors.getFirst().getNamePrefixAndFamilyName() + " et al.";
         };
@@ -349,7 +350,7 @@ public class AuthorList implements Iterable<Author> {
     public String getAsLastFirstNamesWithAnd(boolean abbreviate) {
         return getAuthors().stream()
                            .map(author -> author.getFamilyGiven(abbreviate))
-                           .collect(Collectors.joining(" and "));
+                           .collect(Collectors.joining(AND_SEPARATOR));
     }
 
     /// Returns a list of authors separated with "and". The first author is formatted with {@link Author#getFamilyGiven(boolean)} and each subsequent author is formatted with {@link Author#getGivenFamily(boolean)}.
@@ -366,8 +367,8 @@ public class AuthorList implements Iterable<Author> {
                            .skip(1)
                            .map(author -> author.getGivenFamily(abbreviate))
                            .collect(Collectors.joining(
-                                   " and ",
-                                   authors.getFirst().getFamilyGiven(abbreviate) + " and ",
+                                   AND_SEPARATOR,
+                                   authors.getFirst().getFamilyGiven(abbreviate) + AND_SEPARATOR,
                                    ""));
         };
     }
@@ -424,7 +425,7 @@ public class AuthorList implements Iterable<Author> {
     public String getAsFirstLastNamesWithAnd() {
         return getAuthors().stream()
                            .map(author -> author.getGivenFamily(false))
-                           .collect(Collectors.joining(" and "));
+                           .collect(Collectors.joining(AND_SEPARATOR));
     }
 
     /// Returns the list of authors in a form suitable for alphabetization. This means that last names come first, never preceded by "von" particles, and that any braces are removed. First names are abbreviated so the same name is treated similarly if abbreviated in one case and not in another. This form is not intended to be suitable for presentation, only for sorting.
@@ -436,7 +437,7 @@ public class AuthorList implements Iterable<Author> {
     public String getForAlphabetization() {
         return getAuthors().stream()
                            .map(Author::getNameForAlphabetization)
-                           .collect(Collectors.joining(" and "));
+                           .collect(Collectors.joining(AND_SEPARATOR));
     }
 
     @Override

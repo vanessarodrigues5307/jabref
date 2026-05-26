@@ -84,77 +84,98 @@ public class Author {
         }
 
         StringBuilder sb = new StringBuilder();
-        char lastChar = name.charAt(0);
         for (int i = 0; i < name.length(); i++) {
-            if (i > 0) {
-                lastChar = name.charAt(i - 1);
-            }
-            char currentChar = name.charAt(i);
-            sb.append(currentChar);
-
-            if (currentChar == '.') {
-                // A.A. -> A. A.
-                if (((i + 1) < name.length()) && Character.isUpperCase(name.charAt(i + 1))) {
-                    sb.append(' ');
-                }
-            }
-
-            boolean currentIsUppercaseLetter = Character.isLetter(currentChar) && Character.isUpperCase(currentChar);
-            if (!currentIsUppercaseLetter) {
-                // No uppercase letter, hence nothing to do
-                continue;
-            }
-
-            boolean lastIsLowercaseLetter = Character.isLetter(lastChar) && Character.isLowerCase(lastChar);
-            if (lastIsLowercaseLetter) {
-                // previous character was lowercase (probably an acronym like JabRef) -> don't change anything
-                continue;
-            }
-
-            if ((i + 1) >= name.length()) {
-                // Current character is last character in input, so append dot
-                sb.append('.');
-                continue;
-            }
-
-            char nextChar = name.charAt(i + 1);
-            if ('-' == nextChar) {
-                // A-A -> A.-A.
-                sb.append(".");
-                continue;
-            }
-            if ('.' == nextChar) {
-                // Dot already there, so nothing to do
-                continue;
-            }
-
-            // AA -> A. A.
-            // Only append ". " if the rest of the 'word' is uppercase
-            boolean nextWordIsUppercase = true;
-            char furtherChar = Character.MIN_VALUE;
-            for (int j = i + 1; j < name.length(); j++) {
-                furtherChar = name.charAt(j);
-                if (Character.isWhitespace(furtherChar) || (furtherChar == '-') || (furtherChar == '~') || (furtherChar == '.')) {
-                    // end of word
-                    break;
-                }
-
-                boolean furtherIsUppercaseLetter = Character.isLetter(furtherChar) && Character.isUpperCase(furtherChar);
-                if (!furtherIsUppercaseLetter) {
-                    nextWordIsUppercase = false;
-                    break;
-                }
-            }
-            if (nextWordIsUppercase) {
-                if (Character.isWhitespace(furtherChar)) {
-                    sb.append(".");
-                } else {
-                    sb.append(". ");
-                }
-            }
+            processCharacter(sb, name, i);
         }
 
         return sb.toString().trim();
+    }
+
+    private static void processCharacter(StringBuilder sb, String name, int i) {
+        char lastChar = (i > 0) ? name.charAt(i - 1) : name.charAt(0);
+        char currentChar = name.charAt(i);
+        sb.append(currentChar);
+
+        if (currentChar == '.') {
+            // A.A. -> A. A.
+            if (((i + 1) < name.length()) && Character.isUpperCase(name.charAt(i + 1))) {
+                sb.append(' ');
+            }
+            return;
+        }
+
+        boolean currentIsUppercaseLetter = Character.isLetter(currentChar) && Character.isUpperCase(currentChar);
+        if (!currentIsUppercaseLetter) {
+            // No uppercase letter, hence nothing to do
+            return;
+        }
+
+        boolean lastIsLowercaseLetter = Character.isLetter(lastChar) && Character.isLowerCase(lastChar);
+        if (lastIsLowercaseLetter) {
+            // previous character was lowercase (probably an acronym like JabRef) -> don't change anything
+            return;
+        }
+
+        if ((i + 1) >= name.length()) {
+            // Current character is last character in input, so append dot
+            sb.append('.');
+            return;
+        }
+
+        char nextChar = name.charAt(i + 1);
+        if (handleSpecialNextChars(sb, nextChar, name, i)) {
+            return;
+        }
+
+        // AA -> A. A.
+        // Only append ". " if the rest of the 'word' is uppercase
+        if (isNextWordUppercase(name, i)) {
+            appendDotAndSpace(sb, name, i);
+        }
+    }
+
+    private static boolean handleSpecialNextChars(StringBuilder sb, char nextChar, String name, int i) {
+        if ('-' == nextChar) {
+            // A-A -> A.-A.
+            sb.append(".");
+            return true;
+        }
+        if ('.' == nextChar) {
+            // Dot already there, so nothing to do
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isNextWordUppercase(String name, int i) {
+        for (int j = i + 1; j < name.length(); j++) {
+            char furtherChar = name.charAt(j);
+            if (Character.isWhitespace(furtherChar) || (furtherChar == '-') || (furtherChar == '~') || (furtherChar == '.')) {
+                // end of word
+                return true;
+            }
+
+            boolean furtherIsUppercaseLetter = Character.isLetter(furtherChar) && Character.isUpperCase(furtherChar);
+            if (!furtherIsUppercaseLetter) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void appendDotAndSpace(StringBuilder sb, String name, int i) {
+        char furtherChar = Character.MIN_VALUE;
+        for (int j = i + 1; j < name.length(); j++) {
+            furtherChar = name.charAt(j);
+            if (Character.isWhitespace(furtherChar) || (furtherChar == '-') || (furtherChar == '~') || (furtherChar == '.')) {
+                break;
+            }
+        }
+        if (Character.isWhitespace(furtherChar)) {
+            sb.append(".");
+        } else {
+            sb.append(". ");
+        }
     }
 
     @Override

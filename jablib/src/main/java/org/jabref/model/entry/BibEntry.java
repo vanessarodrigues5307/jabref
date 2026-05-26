@@ -187,16 +187,52 @@ public class BibEntry {
     /// @return the mapped field or null if there is no valid mapping available
     private Optional<Field> getSourceField(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         // 1. Sort out forbidden fields
-        if ((targetField == StandardField.IDS) ||
-                (targetField == StandardField.CROSSREF) ||
-                (targetField == StandardField.XREF) ||
-                (targetField == StandardField.ENTRYSET) ||
-                (targetField == StandardField.RELATED) ||
-                (targetField == StandardField.SORTKEY)) {
+        if (isForbiddenField(targetField)) {
             return Optional.empty();
         }
 
         // 2. Handle special field mappings
+        Optional<Field> specialMapping = handleSpecialFieldMappings(targetField, targetEntry, sourceEntry);
+        if (specialMapping.isPresent()) {
+            return specialMapping;
+        }
+
+        // 3. Fallback to inherit the field with the same name.
+        return Optional.ofNullable(targetField);
+    }
+
+    private boolean isForbiddenField(Field field) {
+        return (field == StandardField.IDS) ||
+                (field == StandardField.CROSSREF) ||
+                (field == StandardField.XREF) ||
+                (field == StandardField.ENTRYSET) ||
+                (field == StandardField.RELATED) ||
+                (field == StandardField.SORTKEY);
+    }
+
+    private Optional<Field> handleSpecialFieldMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
+        // Handle MvBook and Book mappings
+        Optional<Field> mvBookMapping = handleMvBookAndBookMappings(targetField, targetEntry, sourceEntry);
+        if (mvBookMapping != null) {
+            return mvBookMapping;
+        }
+
+        // Handle Collection and Proceedings mappings
+        Optional<Field> collectionMapping = handleCollectionMappings(targetField, targetEntry, sourceEntry);
+        if (collectionMapping != null) {
+            return collectionMapping;
+        }
+
+        // Handle IEEETran mappings
+        Optional<Field> ieeeMapping = handleIEEETranMappings(targetField, targetEntry, sourceEntry);
+        if (ieeeMapping != null) {
+            return ieeeMapping;
+        }
+
+        return null;
+    }
+
+    private Optional<Field> handleMvBookAndBookMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         if (((sourceEntry == StandardEntryType.MvBook) && (targetEntry == StandardEntryType.InBook)) ||
                 ((sourceEntry == StandardEntryType.MvBook) && (targetEntry == StandardEntryType.BookInBook)) ||
                 ((sourceEntry == StandardEntryType.MvBook) && (targetEntry == StandardEntryType.SuppBook)) ||
@@ -245,6 +281,10 @@ public class BibEntry {
             }
         }
 
+        return null;
+    }
+
+    private Optional<Field> handleCollectionMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         if (((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.InBook)) ||
                 ((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.BookInBook)) ||
                 ((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.SuppBook)) ||
@@ -275,6 +315,10 @@ public class BibEntry {
             }
         }
 
+        return null;
+    }
+
+    private Optional<Field> handleIEEETranMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         if (((sourceEntry == IEEETranEntryType.Periodical) && (targetEntry == StandardEntryType.Article)) ||
                 ((sourceEntry == IEEETranEntryType.Periodical) && (targetEntry == StandardEntryType.SuppPeriodical))) {
             if (targetField == StandardField.JOURNALTITLE) {
@@ -296,8 +340,7 @@ public class BibEntry {
             }
         }
 
-        // 3. Fallback to inherit the field with the same name.
-        return Optional.ofNullable(targetField);
+        return null;
     }
 
     /// Returns the text stored in the given field of the given bibtex entry
