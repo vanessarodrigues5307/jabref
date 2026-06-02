@@ -284,16 +284,16 @@ public class AuthorList implements Iterable<Author> {
     ///
     /// @return formatted list of authors.
     public String getAsNatbib() {
-        List<Author> authors = getAuthors();
-        return switch (authors.size()) {
+        List<Author> authorList = getAuthors();
+        return switch (authorList.size()) {
             case 0 ->
                     "";
             case 1 ->
-                    authors.getFirst().getNamePrefixAndFamilyName();
+                    authorList.getFirst().getNamePrefixAndFamilyName();
             case 2 ->
-                    authors.getFirst().getNamePrefixAndFamilyName() + AND_SEPARATOR + authors.get(1).getNamePrefixAndFamilyName();
+                    authorList.getFirst().getNamePrefixAndFamilyName() + AND_SEPARATOR + authorList.get(1).getNamePrefixAndFamilyName();
             default ->
-                    authors.getFirst().getNamePrefixAndFamilyName() + " et al.";
+                    authorList.getFirst().getNamePrefixAndFamilyName() + " et al.";
         };
     }
 
