@@ -213,23 +213,23 @@ public class BibEntry {
     private Optional<Field> handleSpecialFieldMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         // Handle MvBook and Book mappings
         Optional<Field> mvBookMapping = handleMvBookAndBookMappings(targetField, targetEntry, sourceEntry);
-        if (mvBookMapping != null) {
+        if (mvBookMapping.isPresent()) {
             return mvBookMapping;
         }
 
         // Handle Collection and Proceedings mappings
         Optional<Field> collectionMapping = handleCollectionMappings(targetField, targetEntry, sourceEntry);
-        if (collectionMapping != null) {
+        if (collectionMapping.isPresent()) {
             return collectionMapping;
         }
 
         // Handle IEEETran mappings
         Optional<Field> ieeeMapping = handleIEEETranMappings(targetField, targetEntry, sourceEntry);
-        if (ieeeMapping != null) {
+        if (ieeeMapping.isPresent()) {
             return ieeeMapping;
         }
 
-        return null;
+        return Optional.empty();
     }
 
     private Optional<Field> handleMvBookAndBookMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
@@ -281,10 +281,8 @@ public class BibEntry {
             }
         }
 
-        return null;
+        return Optional.empty();
     }
-
-    private Optional<Field> handleCollectionMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
         if (((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.InBook)) ||
                 ((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.BookInBook)) ||
                 ((sourceEntry == StandardEntryType.Book) && (targetEntry == StandardEntryType.SuppBook)) ||
@@ -315,7 +313,7 @@ public class BibEntry {
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     private Optional<Field> handleIEEETranMappings(Field targetField, EntryType targetEntry, EntryType sourceEntry) {
@@ -340,7 +338,7 @@ public class BibEntry {
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /// Returns the text stored in the given field of the given bibtex entry
