@@ -9,6 +9,8 @@ import org.jabref.model.entry.field.BiblatexApaField;
 import org.jabref.model.entry.field.StandardField;
 
 public class BiblatexAPAEntryTypeDefinitions {
+    private BiblatexAPAEntryTypeDefinitions() {
+    }
 
     private static final BibEntryType JURISDICTION = new BibEntryTypeBuilder()
             .withType(BiblatexApaEntryType.Jurisdiction)

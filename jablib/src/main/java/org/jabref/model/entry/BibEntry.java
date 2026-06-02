@@ -394,7 +394,6 @@ public class BibEntry {
 
     /// Returns this entry's ID. It is used internally to distinguish different BibTeX entries.
     //  It is **not** the citation key (which is stored in the {@link InternalField#KEY_FIELD} and also known as BibTeX key).
-
     ///
     /// This id changes on each run of JabRef (because it is currently generated as increasing number).
     ///

@@ -14,13 +14,13 @@ public abstract class EntriesEvent extends BibDatabaseContextChangedEvent {
     private final EntriesEventSource location;
 
     /// @param bibEntries List of BibEntry objects which are involved in this event
-    public EntriesEvent(List<BibEntry> bibEntries) {
+    protected EntriesEvent(List<BibEntry> bibEntries) {
         this(bibEntries, EntriesEventSource.LOCAL);
     }
 
     /// @param bibEntries List of BibEntry objects which are involved in this event
     /// @param location   Location affected by this event
-    public EntriesEvent(@NonNull List<BibEntry> bibEntries, @NonNull EntriesEventSource location) {
+    protected EntriesEvent(@NonNull List<BibEntry> bibEntries, @NonNull EntriesEventSource location) {
         super();
         this.bibEntries = bibEntries;
         this.location = location;

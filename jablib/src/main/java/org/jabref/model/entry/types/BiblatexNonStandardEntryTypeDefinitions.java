@@ -18,6 +18,8 @@ import static org.jabref.model.entry.types.BiblatexNonStandardEntryType.Standard
 import static org.jabref.model.entry.types.BiblatexNonStandardEntryType.Video;
 
 public class BiblatexNonStandardEntryTypeDefinitions {
+    private BiblatexNonStandardEntryTypeDefinitions() {
+    }
 
     private static final BibEntryType ARTWORK = new BibEntryType(Artwork, BiblatexEntryTypeDefinitions.getMisc().getAllBibFields(), BiblatexEntryTypeDefinitions.getMisc().getRequiredFields());
     private static final BibEntryType AUDIO = new BibEntryType(Audio, BiblatexEntryTypeDefinitions.getMisc().getAllBibFields(), BiblatexEntryTypeDefinitions.getMisc().getRequiredFields());

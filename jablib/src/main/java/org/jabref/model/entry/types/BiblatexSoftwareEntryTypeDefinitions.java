@@ -10,6 +10,9 @@ import org.jabref.model.entry.field.OrFields;
 import org.jabref.model.entry.field.StandardField;
 
 public class BiblatexSoftwareEntryTypeDefinitions {
+    private BiblatexSoftwareEntryTypeDefinitions() {
+    }
+
     private static final BibEntryType SOFTWARE = new BibEntryTypeBuilder()
             .withType(StandardEntryType.Software)
             .withRequiredFields(new OrFields(StandardField.AUTHOR, StandardField.EDITOR), StandardField.TITLE, StandardField.URL, StandardField.VERSION, StandardField.YEAR)

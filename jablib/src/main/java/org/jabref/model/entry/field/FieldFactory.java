@@ -27,6 +27,8 @@ import org.jspecify.annotations.Nullable;
 @AllowedToUseLogic("Uses StringUtil temporarily")
 @NullMarked
 public class FieldFactory {
+    private FieldFactory() {
+    }
 
     /// Character separating field names that are to be used in sequence as fallbacks for a single column
     /// (e.g. "author/editor" to use editor where author is not set):

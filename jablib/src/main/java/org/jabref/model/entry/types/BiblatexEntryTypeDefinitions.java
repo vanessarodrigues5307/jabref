@@ -13,6 +13,8 @@ import org.jabref.model.entry.field.StandardField;
 ///
 /// The definitions for BibTeX are done at {@link BibtexEntryTypeDefinitions}
 public class BiblatexEntryTypeDefinitions {
+    private BiblatexEntryTypeDefinitions() {
+    }
 
     private static final BibEntryType ARTICLE = new BibEntryTypeBuilder()
             .withType(StandardEntryType.Article)

@@ -7,6 +7,9 @@ import org.jabref.logic.util.strings.StringUtil;
 
 @AllowedToUseLogic("Uses StringUtil temporarily")
 public class FieldTextMapper {
+    private FieldTextMapper() {
+    }
+
     public static String getDisplayName(Field field) {
         if (field.isStandardField()) {
             StandardField standardField = (StandardField) field;
